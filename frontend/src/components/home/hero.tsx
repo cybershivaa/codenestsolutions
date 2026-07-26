@@ -4,8 +4,25 @@ import { ArrowRight, Sparkles, Bot, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Counter } from "@/components/counter";
 import { openEstimator } from "@/components/cost-estimator-modal";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export function Hero() {
+  const settings = useSiteSettings();
+
+  const renderTitle = (title: string) => {
+    const target = "Powerful Digital Solutions";
+    if (title.endsWith(target)) {
+      const main = title.slice(0, -target.length);
+      return (
+        <>
+          {main}
+          <span className="text-gradient">{target}</span>
+        </>
+      );
+    }
+    return title;
+  };
+
   return (
     <section className="relative overflow-hidden">
       {/* Ambient glows + grid */}
@@ -42,7 +59,7 @@ export function Hero() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            Premier Software & Mobile App Agency
+            {settings.hero.eyebrow}
           </motion.div>
 
           <motion.h1
@@ -51,8 +68,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="text-5xl md:text-6xl xl:text-7xl font-semibold tracking-[-0.03em] leading-[1.02] text-foreground"
           >
-            Transforming Ideas Into{" "}
-            <span className="text-gradient">Powerful Digital Solutions</span>
+            {renderTitle(settings.hero.title)}
           </motion.h1>
 
           <motion.p
@@ -61,9 +77,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.12 }}
             className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed"
           >
-            CodeNest Solutions builds enterprise-grade web applications, Flutter & React Native
-            mobile apps, School/Hospital ERPs, and Gemini AI integrations for high-growth
-            businesses.
+            {settings.hero.subtitle}
           </motion.p>
 
           <motion.div
@@ -72,17 +86,31 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.18 }}
             className="mt-9 flex flex-col sm:flex-row gap-3"
           >
-            <Button
-              size="lg"
-              className="rounded-full h-12 px-6 shadow-glow"
-              onClick={openEstimator}
-            >
-              <Sparkles className="h-4 w-4" />
-              Get Free Custom Quote
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            {settings.hero.ctaPrimary.to === "/contact" ? (
+              <Button
+                size="lg"
+                className="rounded-full h-12 px-6 shadow-glow"
+                onClick={openEstimator}
+              >
+                <Sparkles className="h-4 w-4" />
+                {settings.hero.ctaPrimary.label}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full h-12 px-6 shadow-glow"
+              >
+                <Link to={settings.hero.ctaPrimary.to}>
+                  <Sparkles className="h-4 w-4" />
+                  {settings.hero.ctaPrimary.label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            )}
             <Button asChild size="lg" variant="outline" className="rounded-full h-12 px-6 glass">
-              <Link to="/portfolio">Explore Case Studies</Link>
+              <Link to={settings.hero.ctaSecondary.to}>{settings.hero.ctaSecondary.label}</Link>
             </Button>
           </motion.div>
 

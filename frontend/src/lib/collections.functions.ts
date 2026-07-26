@@ -72,7 +72,7 @@ function pickArray(v: unknown, fallback: any[]): any[] {
 }
 
 export const getPublicCollection = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => z.object({ key: z.string() }).parse(input))
+  .validator((input: unknown) => z.object({ key: z.string() }).parse(input))
   .handler(async ({ data }): Promise<any[]> => {
     const key = data.key as CollectionKey;
     const fallback = collectionDefaults[key] ?? [];
@@ -92,7 +92,7 @@ export const getPublicCollection = createServerFn({ method: "GET" })
 
 export const getDraftCollection = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => z.object({ key: z.string() }).parse(input))
+  .validator((input: unknown) => z.object({ key: z.string() }).parse(input))
   .handler(async ({ data, context }): Promise<any[]> => {
     const key = data.key as CollectionKey;
     const fallback = collectionDefaults[key] ?? [];
@@ -110,7 +110,7 @@ const saveSchema = z.object({ key: z.string(), items: z.array(z.record(z.string(
 
 export const saveDraftCollection = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => saveSchema.parse(input))
+  .validator((input: unknown) => saveSchema.parse(input))
   .handler(async ({ data, context }) => {
     const sb = context.supabase as unknown as Loose;
     const id = rowId(data.key as CollectionKey);
@@ -137,7 +137,7 @@ export const saveDraftCollection = createServerFn({ method: "POST" })
 
 export const publishCollection = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => saveSchema.parse(input))
+  .validator((input: unknown) => saveSchema.parse(input))
   .handler(async ({ data, context }) => {
     const sb = context.supabase as unknown as Loose;
     const id = rowId(data.key as CollectionKey);

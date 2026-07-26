@@ -50,7 +50,7 @@ function RegisterPage() {
       toast.success(res.message || "Account created — check your email to verify.");
       navigate({ to: "/client/login" });
     } catch (e) {
-      toast.error(e instanceof ApiError ? e.message : "Registration failed");
+      toast.error(e instanceof Error ? e.message : "Registration failed");
     } finally {
       setSubmitting(false);
     }

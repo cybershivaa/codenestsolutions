@@ -28,10 +28,10 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin", replace: true });
+      if (data.session) navigate({ to: "/admin/cms", replace: true });
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/admin", replace: true });
+      if (session) navigate({ to: "/admin/cms", replace: true });
     });
     return () => sub.subscription.unsubscribe();
   }, [navigate]);
@@ -53,7 +53,10 @@ function AuthPage() {
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/admin`,
-        data: { display_name: displayName },
+        data: { 
+          display_name: displayName,
+          is_admin: true,
+        },
       },
     });
     setLoading(false);

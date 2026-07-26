@@ -1,27 +1,99 @@
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { PageHeader } from "@/admin/components/PageHeader";
 import { StatusBadge } from "@/admin/components/StatusBadge";
 import { Button } from "@/components/ui/button";
-import { team } from "@/admin/data/dummy";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Mail, Plus, Pencil } from "lucide-react";
+import { Mail, Plus, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { useIsAdmin } from "@/hooks/useAuthUser";
+import { Navigate } from "@tanstack/react-router";
 
 export function TeamPage() {
+  const { isAdmin, loading: authLoading } = useIsAdmin();
+  const [members, setMembers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    async function loadTeam() {
+      try {
+        // Fetch all roles
+        const { data: roles, error: rolesError } = await supabase
+          .from("user_roles")
+          .select("user_id, role");
+        if (rolesError) throw rolesError;
+
+        // Get admin user IDs
+        const adminIds = roles.filter((r) => r.role === "admin").map((r) => r.user_id);
+
+        if (adminIds.length === 0) {
+          setMembers([]);
+          return;
+        }
+
+        // Fetch profiles of admin users
+        const { data: profiles, error: profilesError } = await supabase
+          .from("profiles")
+          .select("*")
+          .in("id", adminIds);
+        if (profilesError) throw profilesError;
+
+        // Map profiles to team structure
+        const mapped = profiles.map((p) => ({
+          id: p.id,
+          name: p.display_name || "Admin User",
+          email: p.email || "",
+          role: "Admin",
+          status: "Active",
+          avatar: p.avatar_url || "",
+        }));
+
+        setMembers(mapped);
+      } catch (e: any) {
+        console.error("Error loading team:", e);
+        toast.error(e?.message ?? "Failed to load team members");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTeam();
+  }, [isAdmin]);
+
+  const copyInviteLink = () => {
+    const link = `${window.location.origin}/auth`;
+    navigator.clipboard.writeText(link);
+    toast.success("Admin registration link copied to clipboard!");
+  };
+
+  if (authLoading || (isAdmin && loading)) {
+    return (
+      <div className="grid h-64 place-items-center">
+        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  if (!isAdmin) return <Navigate to="/admin" />;
+
   return (
     <div>
       <PageHeader
         title="Team"
-        description="People behind CodeNest."
+        description="People with admin access to CodeNest solutions."
         actions={
           <Button
             size="sm"
             className="bg-gradient-to-r from-[var(--brand)] to-[var(--brand-3)] text-white"
+            onClick={copyInviteLink}
           >
             <Plus className="mr-1.5 h-3.5 w-3.5" /> Invite Member
           </Button>
         }
       />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {team.map((m) => (
+        {members.map((m) => (
           <div
             key={m.id}
             className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/70 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:shadow-lg"
@@ -32,7 +104,7 @@ export function TeamPage() {
                 <AvatarFallback>
                   {m.name
                     .split(" ")
-                    .map((s) => s[0])
+                    .map((s: string) => s[0])
                     .join("")}
                 </AvatarFallback>
               </Avatar>
@@ -42,19 +114,23 @@ export function TeamPage() {
               </div>
               <StatusBadge status={m.status} />
             </div>
-            <div className="mt-4 flex items-center justify-between border-t border-border/50 pt-3 text-xs">
-              <a
-                href={`mailto:${m.email}`}
-                className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"
-              >
-                <Mail className="h-3.5 w-3.5" /> {m.email}
-              </a>
-              <Button variant="ghost" size="icon" className="h-7 w-7">
-                <Pencil className="h-3.5 w-3.5" />
-              </Button>
-            </div>
+            {m.email && (
+              <div className="mt-4 flex items-center justify-between border-t border-border/50 pt-3 text-xs">
+                <a
+                  href={`mailto:${m.email}`}
+                  className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"
+                >
+                  <Mail className="h-3.5 w-3.5" /> {m.email}
+                </a>
+              </div>
+            )}
           </div>
         ))}
+        {members.length === 0 && (
+          <div className="col-span-full rounded-2xl border border-dashed p-8 text-center text-sm text-muted-foreground">
+            No admin users found.
+          </div>
+        )}
       </div>
     </div>
   );

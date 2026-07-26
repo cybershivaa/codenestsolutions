@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import {
@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { projects as fallback, type Project } from "@/data/portfolio";
+import { stenomaniaPreviewSvg } from "@/data/preview-assets";
 import { useCollection } from "@/hooks/useCollection";
 import { ProjectCaseStudyDialog } from "@/components/project-case-study-dialog";
 import { cn } from "@/lib/utils";
@@ -21,10 +22,16 @@ type Device = "desktop" | "laptop" | "mobile";
 export function FeaturedProject() {
   const list = useCollection<Project>("portfolio");
   const featured = (list && list.length > 0 ? list : fallback)[0] as Project;
+  const localFeatured = fallback.find((project) => project.slug === featured.slug) ?? fallback[0];
   const [device, setDevice] = useState<Device>("desktop");
   const [open, setOpen] = useState(false);
+  const [previewFailed, setPreviewFailed] = useState(false);
 
-  const previewSrc = featured.livePreview ?? featured.image;
+  useEffect(() => {
+    setPreviewFailed(false);
+  }, [featured.slug]);
+
+  const previewSrc = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(stenomaniaPreviewSvg)}`;
   const canvasWidth = device === "desktop" ? "1280" : device === "laptop" ? "1024" : "390";
 
   return (
@@ -200,15 +207,27 @@ export function FeaturedProject() {
                     </span>
                     <Bell className="ml-auto h-3.5 w-3.5 shrink-0" />
                   </div>
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={previewSrc}
-                      alt={`${featured.title} live preview`}
-                      loading="lazy"
-                      width={800}
-                      height={512}
-                      className="w-full h-full object-cover object-top"
-                    />
+                  <div className="aspect-[16/10] overflow-hidden bg-slate-950">
+                    {previewSrc && !previewFailed ? (
+                      <img
+                        src={previewSrc}
+                        alt={`${featured.title} live preview`}
+                        loading="lazy"
+                        width={800}
+                        height={512}
+                        className="h-full w-full object-cover object-top"
+                        onError={() => setPreviewFailed(true)}
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-6 text-center">
+                        <div>
+                          <div className="text-sm font-semibold text-white">Live preview unavailable</div>
+                          <div className="mt-1 text-xs text-white/60">
+                            The dedicated preview asset could not be loaded.
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center justify-between px-4 py-2 bg-slate-950 text-[11px]">
                     <span className="inline-flex items-center gap-1.5 text-emerald-400">

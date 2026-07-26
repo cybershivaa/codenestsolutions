@@ -46,7 +46,7 @@ function LoginPage() {
       toast.success("Welcome back!");
       navigate({ to: redirect || "/client", replace: true });
     } catch (e) {
-      toast.error(e instanceof ApiError ? e.message : "Login failed");
+      toast.error(e instanceof Error ? e.message : "Login failed");
     } finally {
       setSubmitting(false);
     }

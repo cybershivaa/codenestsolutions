@@ -65,7 +65,7 @@ const settingsSchema = z.record(z.string(), z.unknown());
 
 export const saveDraftSettings = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => settingsSchema.parse(input))
+  .validator((input: unknown) => settingsSchema.parse(input))
   .handler(async ({ data, context }) => {
     const sb = context.supabase as unknown as LooseSupabase;
     const { error } = await sb
@@ -78,7 +78,7 @@ export const saveDraftSettings = createServerFn({ method: "POST" })
 
 export const publishSettings = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => settingsSchema.parse(input))
+  .validator((input: unknown) => settingsSchema.parse(input))
   .handler(async ({ data, context }) => {
     const sb = context.supabase as unknown as LooseSupabase;
     const { error } = await sb

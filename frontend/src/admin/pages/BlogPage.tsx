@@ -2,10 +2,12 @@ import { PageHeader } from "@/admin/components/PageHeader";
 import { DataTable, type Column } from "@/admin/components/DataTable";
 import { StatusBadge } from "@/admin/components/StatusBadge";
 import { Button } from "@/components/ui/button";
-import { blogPosts, type BlogPost } from "@/admin/data/dummy";
-import { Plus, Pencil, Trash2, Eye } from "lucide-react";
+import { useCollection } from "@/hooks/useCollection";
+import { Plus, Pencil } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import type { Post } from "@/data/blog";
 
-const columns: Column<BlogPost>[] = [
+const columns: Column<Post>[] = [
   {
     key: "title",
     header: "Post",
@@ -17,20 +19,12 @@ const columns: Column<BlogPost>[] = [
     ),
   },
   { key: "category", header: "Category" },
-  { key: "status", header: "Status", render: (r) => <StatusBadge status={r.status} /> },
+  { key: "readTime", header: "Read Time" },
+  { key: "status", header: "Status", render: () => <StatusBadge status="Published" /> },
   {
-    key: "views",
-    header: "Views",
-    render: (r) => (
-      <span className="inline-flex items-center gap-1 text-muted-foreground">
-        <Eye className="h-3.5 w-3.5" /> {r.views.toLocaleString()}
-      </span>
-    ),
-  },
-  {
-    key: "publishedAt",
+    key: "date",
     header: "Date",
-    render: (r) => new Date(r.publishedAt).toLocaleDateString(),
+    render: (r) => <span>{r.date}</span>,
   },
   {
     key: "actions",
@@ -38,11 +32,10 @@ const columns: Column<BlogPost>[] = [
     className: "text-right",
     render: () => (
       <div className="flex justify-end gap-1">
-        <Button variant="ghost" size="icon" className="h-8 w-8">
-          <Pencil className="h-3.5 w-3.5" />
-        </Button>
-        <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive">
-          <Trash2 className="h-3.5 w-3.5" />
+        <Button asChild variant="ghost" size="icon" className="h-8 w-8">
+          <Link to="/admin/collections" search={{ tab: "blog" }}>
+            <Pencil className="h-3.5 w-3.5" />
+          </Link>
         </Button>
       </div>
     ),
@@ -50,21 +43,22 @@ const columns: Column<BlogPost>[] = [
 ];
 
 export function BlogPage() {
+  const posts = useCollection<Post>("blog");
+
   return (
     <div>
       <PageHeader
         title="Blog"
         description="Author, review and publish blog articles."
         actions={
-          <Button
-            size="sm"
-            className="bg-gradient-to-r from-[var(--brand)] to-[var(--brand-3)] text-white"
-          >
-            <Plus className="mr-1.5 h-3.5 w-3.5" /> New Post
+          <Button asChild size="sm" className="bg-gradient-to-r from-[var(--brand)] to-[var(--brand-3)] text-white">
+            <Link to="/admin/collections" search={{ tab: "blog" }}>
+              <Plus className="mr-1.5 h-3.5 w-3.5" /> Edit Blog Posts
+            </Link>
           </Button>
         }
       />
-      <DataTable rows={blogPosts} columns={columns} searchKeys={["title", "author", "category"]} />
+      <DataTable rows={posts} columns={columns} searchKeys={["title", "author", "category"]} />
     </div>
   );
 }

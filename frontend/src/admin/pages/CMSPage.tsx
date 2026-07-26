@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2, Save, Send, Plus, Trash2, GripVertical } from "lucide-react";
 import { PageHeader } from "@/admin/components/PageHeader";
@@ -12,11 +13,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { getDraftSettings, saveDraftSettings, publishSettings } from "@/lib/cms.functions";
 import { defaultSettings, type SiteSettings, type NavItem } from "@/data/defaultSettings";
+import { invalidatePublishedContent } from "@/hooks/siteContentSync";
 
 export function CMSPage() {
   const loadDraft = useServerFn(getDraftSettings);
   const saveDraft = useServerFn(saveDraftSettings);
   const publish = useServerFn(publishSettings);
+  const queryClient = useQueryClient();
 
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [loading, setLoading] = useState(true);
@@ -51,6 +54,7 @@ export function CMSPage() {
     setPublishing(true);
     try {
       await publish({ data: settings as unknown as Record<string, unknown> });
+      invalidatePublishedContent(queryClient);
       toast.success("Published — public site updated");
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e);

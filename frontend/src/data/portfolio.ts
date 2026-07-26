@@ -3,7 +3,7 @@ import aetherpayImg from "@/assets/proj-aetherpay.jpg";
 import zenithImg from "@/assets/proj-zenith.jpg";
 import carepulseImg from "@/assets/proj-carepulse.jpg";
 import cognibotImg from "@/assets/proj-cognibot.jpg";
-import stenomaniaLive from "@/assets/stenomania-preview.png.asset.json";
+import stenomaniaLive from "@/assets/stenomania-preview.svg";
 
 export type Project = {
   slug: string;

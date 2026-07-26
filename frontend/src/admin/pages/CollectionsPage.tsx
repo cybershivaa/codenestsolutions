@@ -15,7 +15,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Save, Upload, RotateCcw, Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 import { useIsAdmin } from "@/hooks/useAuthUser";
-import { Navigate } from "@tanstack/react-router";
+import { Navigate, useSearch } from "@tanstack/react-router";
+import { invalidatePublishedContent } from "@/hooks/siteContentSync";
 
 const KEYS: { key: CollectionKey; label: string }[] = [
   { key: "services", label: "Services" },
@@ -33,8 +34,9 @@ const KEYS: { key: CollectionKey; label: string }[] = [
 
 export function CollectionsPage() {
   const { isAdmin, loading } = useIsAdmin();
+  const { tab } = useSearch({ from: "/admin/collections" });
   const qc = useQueryClient();
-  const [active, setActive] = useState<CollectionKey>("services");
+  const [active, setActive] = useState<CollectionKey>((tab as CollectionKey) || "services");
   const [items, setItems] = useState<any[]>([]);
   const [dirty, setDirty] = useState(false);
 
@@ -69,7 +71,7 @@ export function CollectionsPage() {
     onSuccess: () => {
       toast.success("Published live");
       setDirty(false);
-      qc.invalidateQueries({ queryKey: ["collection", active] });
+      invalidatePublishedContent(qc);
     },
     onError: (e: any) => toast.error(e?.message ?? "Publish failed"),
   });
