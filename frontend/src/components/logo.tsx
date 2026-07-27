@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
-
-const logoSrc = new URL("../assets/netweavesolutions-logo.svg", import.meta.url).href;
+import logoImage from "../assets/logo.png";
 
 export function LogoMark({ className }: { className?: string }) {
   return (
     <img
-      src={logoSrc}
+      src={logoImage}
       alt="Netweavesolutions logo"
       className={cn("h-7 w-7", className)}
       aria-hidden="true"
