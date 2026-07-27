@@ -4,7 +4,7 @@ import { Menu, X, Calculator, UserCircle2, LogOut } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./theme-toggle";
-import { Logo } from "./logo";
+import { LogoMark } from "./logo";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { cn } from "@/lib/utils";
 import { openEstimator } from "@/components/cost-estimator-modal";
@@ -41,7 +41,7 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" aria-label={settings.brand.name} className="shrink-0">
-            <Logo wordmark={settings.brand.short || "Netweavesolutions"} />
+            <LogoMark />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { Logo } from "./logo";
+import { LogoMark } from "./logo";
 import { GithubIcon, LinkedinIcon, TwitterIcon, InstagramIcon } from "./social-icons";
 
 export function Footer() {
@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link to="/" aria-label={brand.name}>
-              <Logo wordmark={brand.short || "Netweavesolutions"} />
+              <LogoMark />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
               {brand.tagline}
