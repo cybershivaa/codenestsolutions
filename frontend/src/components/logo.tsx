@@ -6,7 +6,7 @@ export function LogoMark({ className }: { className?: string }) {
     <img
       src={logoImage}
       alt="Netweavesolutions logo"
-      className={cn("h-7 w-7", className)}
+      className={cn("h-12 w-12", className)}
       aria-hidden="true"
     />
   );
