@@ -17,7 +17,7 @@ lives outside Lovable and is called over HTTPS.
 ## Local dev
 
 ```bash
-cd server
+cd backend
 cp .env.example .env       # fill in MONGODB_URI + JWT secrets + SMTP
 npm install
 npm run dev
@@ -27,13 +27,33 @@ npm run dev
 ## Deploy (pick one)
 
 - **Railway** — New Project → Deploy from repo → set env vars from `.env.example` → Deploy.
-- **Render** — New Web Service → root `server/` → build `npm install` → start `npm start` → env vars.
-- **Fly.io** — `fly launch` inside `server/`, then `fly secrets set …`.
+- **Render** — New Web Service → root `backend/` → build `npm install` → start `npm start` → env vars.
+- **Fly.io** — `fly launch` inside `backend/`, then `fly secrets set …`.
 
 After deploy, copy the public URL and set it as `VITE_CLIENT_API_URL` in the
-Lovable project (Project Settings → Environment Variables), e.g.
+Lovable frontend project (Project Settings → Environment Variables), e.g.
 `https://codenest-api.up.railway.app`.
 
+### Render env vars
+
+Use these exact names in Render for the backend service:
+
+- `MONGODB_URI`
+- `JWT_ACCESS_SECRET`
+- `JWT_REFRESH_SECRET`
+- `API_PUBLIC_URL=https://<your-backend-url>`
+- `FRONTEND_ORIGIN=https://<your-vercel-frontend-url>`
+- `COOKIE_SECURE=true`
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_USER`
+- `SMTP_PASS`
+- `SMTP_FROM="Your App <noreply@yourdomain.com>"`
+- `NODE_ENV=production`
+- `PORT=4000` (optional)
+
+`FRONTEND_ORIGIN` must match the deployed Vercel frontend URL so backend CORS
+allows requests from the app.
 ## Endpoints (Phase 1)
 
 Auth (`/auth`)
