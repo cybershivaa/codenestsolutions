@@ -18,10 +18,10 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/client/")({
   head: () => ({
     meta: [
-      { title: "Client Dashboard — CodeNest Solutions" },
+      { title: "Client Dashboard — Netweavesolutions" },
       {
         name: "description",
-        content: "Manage your projects, invoices, meetings, and messages with CodeNest.",
+        content: "Manage your projects, invoices, meetings, and messages with Netweavesolutions.",
       },
       { name: "robots", content: "noindex" },
     ],
@@ -124,3 +124,4 @@ function ClientDashboard() {
     </ClientPortalShell>
   );
 }
+

@@ -106,8 +106,8 @@ INSERT INTO public.site_content (id, data, published_data) VALUES (
   'main',
   '{
     "brand": {
-      "name": "CodeNest Solutions",
-      "short": "CodeNest",
+      "name": "Netweavesolutions",
+      "short": "Netweavesolutions",
       "tagline": "Transforming Ideas Into Powerful Digital Solutions.",
       "description": "Premium software development agency crafting websites, apps and custom software that scale.",
       "email": "hello@company.com",
@@ -142,11 +142,11 @@ INSERT INTO public.site_content (id, data, published_data) VALUES (
       "ctaSecondary": {"label": "View Work", "to": "/portfolio"}
     },
     "footer": {
-      "copyright": "© CodeNest Solutions. All rights reserved.",
+      "copyright": "© Netweavesolutions. All rights reserved.",
       "showNewsletter": true
     },
     "seo": {
-      "title": "CodeNest Solutions — Premium Software Development Agency",
+      "title": "Netweavesolutions — Premium Software Development Agency",
       "description": "Transforming Ideas Into Powerful Digital Solutions."
     },
     "theme": {
@@ -160,3 +160,4 @@ INSERT INTO public.site_content (id, data, published_data) VALUES (
 
 -- Publish the seed data
 UPDATE public.site_content SET published_data = data WHERE id = 'main';
+

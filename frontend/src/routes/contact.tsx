@@ -38,7 +38,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Schedule a technical discovery call or send a direct project brief to CodeNest Solutions.",
+          "Schedule a technical discovery call or send a direct project brief to Netweavesolutions.",
       },
       { property: "og:title", content: `Contact — ${brand.name}` },
       { property: "og:description", content: "Let's discuss your project." },
@@ -86,7 +86,7 @@ function Contact() {
     (e.target as HTMLFormElement).reset();
   };
 
-  const waLink = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hi CodeNest, I'd like to discuss a project.")}`;
+  const waLink = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent("Hi Netweavesolutions, I'd like to discuss a project.")}`;
 
   return (
     <Section className="pt-20 md:pt-28">
@@ -123,7 +123,7 @@ function Contact() {
 
               <div className="mt-6 space-y-4">
                 <a
-                  href={`mailto:contact@codenest.solutions`}
+                  href={`mailto:netweavesolutions.co@gamil.com`}
                   className="flex items-start gap-3 group"
                 >
                   <div className="grid h-10 w-10 place-items-center rounded-xl bg-white/10 border border-white/15">
@@ -132,7 +132,7 @@ function Contact() {
                   <div className="text-sm">
                     <div className="text-white/60 text-xs">Direct Email</div>
                     <div className="text-white group-hover:text-cyan-200 transition-colors">
-                      contact@codenest.solutions
+                      netweavesolutions.co@gamil.com
                     </div>
                   </div>
                 </a>
@@ -204,7 +204,7 @@ function Contact() {
             </div>
 
             <div className="mt-4">
-              <div className="font-semibold text-white">CodeNest Solutions Tech Park</div>
+              <div className="font-semibold text-white">Netweavesolutions Tech Park</div>
               <div className="text-sm text-white/60">Bangalore & Delhi NCR, India</div>
             </div>
           </div>
@@ -353,3 +353,4 @@ function Contact() {
     </Section>
   );
 }
+

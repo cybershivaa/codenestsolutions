@@ -8,12 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
-import type { ClientUser } from "@/lib/client-api";
-import type { User } from "@supabase/supabase-js";
-import type { Database } from "@/integrations/supabase/types";
-
-type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"];
+import { api, isApiConfigured, setAccessToken, type ClientUser } from "@/lib/client-api";
 
 export interface RegisterPayload {
   fullName: string;
@@ -37,219 +32,141 @@ interface AuthState {
   refreshUser: () => Promise<void>;
   updateProfile: (updates: Partial<ClientUser>) => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
-  updatePassword: (password: string) => Promise<void>;
+  updatePassword: (password: string, token?: string) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 }
 
 const Ctx = createContext<AuthState | null>(null);
 
-function mapProfileAndAuthToClientUser(authUser: User, profile: ProfileRow): ClientUser {
+function normalizeClientUser(raw: Partial<ClientUser> | null | undefined): ClientUser | null {
+  if (!raw) return null;
   return {
-    _id: authUser.id,
-    email: authUser.email || "",
-    fullName:
-      profile.display_name ||
-      authUser.user_metadata?.display_name ||
-      authUser.user_metadata?.fullName ||
-      "",
-    phone: profile.phone || authUser.user_metadata?.phone || "",
-    companyName:
-      profile.company_name ||
-      authUser.user_metadata?.company_name ||
-      authUser.user_metadata?.companyName ||
-      "",
-    industry: profile.industry || "",
-    gstNumber: profile.gst_number || "",
-    address: profile.address || "",
-    city: profile.city || "",
-    state: profile.state || "",
-    country: profile.country || authUser.user_metadata?.country || "",
-    pincode: profile.pincode || "",
-    website: profile.website || "",
-    linkedin: profile.linkedin || "",
-    timezone: profile.timezone || "",
-    profilePhotoUrl: profile.avatar_url || authUser.user_metadata?.avatar_url || "",
-    companyLogoUrl: profile.company_logo_url || "",
-    emailVerified: authUser.email_confirmed_at ? true : false,
-    createdAt: profile.created_at || authUser.created_at,
-    lastLoginAt: authUser.last_sign_in_at,
-  };
-}
-
-function mapAuthToClientUser(authUser: User): ClientUser {
-  return {
-    _id: authUser.id,
-    email: authUser.email || "",
-    fullName: authUser.user_metadata?.display_name || authUser.user_metadata?.fullName || "",
-    phone: authUser.user_metadata?.phone || "",
-    companyName: authUser.user_metadata?.company_name || authUser.user_metadata?.companyName || "",
-    country: authUser.user_metadata?.country || "",
-    emailVerified: authUser.email_confirmed_at ? true : false,
-    createdAt: authUser.created_at,
-    lastLoginAt: authUser.last_sign_in_at,
+    _id: raw._id ?? "",
+    email: raw.email ?? "",
+    fullName: raw.fullName ?? "",
+    phone: raw.phone ?? "",
+    companyName: raw.companyName ?? "",
+    country: raw.country ?? "",
+    emailVerified: raw.emailVerified ?? true,
+    profilePhotoUrl: raw.profilePhotoUrl ?? "",
+    companyLogoUrl: raw.companyLogoUrl ?? "",
+    industry: raw.industry ?? "",
+    gstNumber: raw.gstNumber ?? "",
+    address: raw.address ?? "",
+    city: raw.city ?? "",
+    state: raw.state ?? "",
+    pincode: raw.pincode ?? "",
+    website: raw.website ?? "",
+    linkedin: raw.linkedin ?? "",
+    timezone: raw.timezone ?? "",
+    createdAt: raw.createdAt ?? "",
+    lastLoginAt: raw.lastLoginAt ?? "",
   };
 }
 
 export function ClientAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<ClientUser | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // We are using Supabase, so it's always configured
-  const configured = true;
+  const configured = isApiConfigured();
 
   const refreshUser = useCallback(async () => {
     try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (!session?.user) {
-        setUser(null);
-        setLoading(false);
-        return;
-      }
-      const authUser = session.user;
-      const { data: profile, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", authUser.id)
-        .maybeSingle();
-
-      if (error || !profile) {
-        setUser(mapAuthToClientUser(authUser));
-      } else {
-        setUser(mapProfileAndAuthToClientUser(authUser, profile));
-      }
-    } catch (e) {
-      console.error("Error refreshing user:", e);
+      const data = await api.get<{ client?: Partial<ClientUser> }>('/auth/me');
+      setUser(normalizeClientUser(data.client ?? null));
+    } catch (error) {
+      console.warn("Client session refresh failed:", error);
       setUser(null);
+      setAccessToken(null);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  // Listen for auth state changes
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session?.user) {
-        const authUser = session.user;
-        try {
-          const { data: profile, error } = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("id", authUser.id)
-            .maybeSingle();
-
-          if (error || !profile) {
-            setUser(mapAuthToClientUser(authUser));
-          } else {
-            setUser(mapProfileAndAuthToClientUser(authUser, profile));
-          }
-        } catch {
-          setUser(mapAuthToClientUser(authUser));
-        }
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    });
-
-    // Run initial fetch
-    refreshUser();
-
-    return () => {
-      subscription.unsubscribe();
-    };
+    void refreshUser();
   }, [refreshUser]);
 
   const login = useCallback(
     async (email: string, password: string) => {
-      const { error } = await supabase.auth.signInWithPassword({
+      const data = await api.post<{ accessToken?: string; client?: Partial<ClientUser> }>('/auth/login', {
         email,
         password,
+        rememberMe: true,
       });
-      if (error) throw error;
-      await refreshUser();
+      setAccessToken(data.accessToken ?? null);
+      setUser(normalizeClientUser(data.client ?? null));
     },
-    [refreshUser],
+    [],
   );
 
   const register = useCallback(async (payload: RegisterPayload) => {
-    const { data, error } = await supabase.auth.signUp({
+    const data = await api.post<{ message?: string }>('/auth/register', {
+      fullName: payload.fullName,
       email: payload.email,
+      phone: payload.phone,
+      companyName: payload.companyName,
+      country: payload.country,
       password: payload.password,
-      options: {
-        data: {
-          fullName: payload.fullName,
-          display_name: payload.fullName,
-          phone: payload.phone,
-          companyName: payload.companyName,
-          company_name: payload.companyName,
-          country: payload.country,
-        },
-        emailRedirectTo: `${window.location.origin}/client/login`,
-      },
+      confirmPassword: payload.confirmPassword,
+      referralCode: payload.referralCode,
+      acceptTerms: payload.acceptTerms,
     });
 
-    if (error) throw error;
+    setAccessToken(null);
+    setUser(null);
 
     return {
-      message: data.session
-        ? "Account created and logged in!"
-        : "Account created! Please check your email for confirmation link.",
+      message: data.message ?? 'Account created successfully. You can sign in now.',
     };
   }, []);
 
   const logout = useCallback(async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    try {
+      await api.post('/auth/logout');
+    } catch {
+      // Ignore logout errors and clear local session state.
+    }
+    setAccessToken(null);
     setUser(null);
   }, []);
 
   const updateProfile = useCallback(
     async (updates: Partial<ClientUser>) => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      const userId = session?.user?.id;
-      if (!userId) throw new Error("No active session");
+      const payload = {
+        fullName: updates.fullName,
+        phone: updates.phone,
+        companyName: updates.companyName,
+        industry: updates.industry,
+        gstNumber: updates.gstNumber,
+        address: updates.address,
+        city: updates.city,
+        state: updates.state,
+        country: updates.country,
+        pincode: updates.pincode,
+        website: updates.website,
+        linkedin: updates.linkedin,
+        timezone: updates.timezone,
+        profilePhotoUrl: updates.profilePhotoUrl,
+        companyLogoUrl: updates.companyLogoUrl,
+      };
 
-      // Map camelCase fields to snake_case table columns
-      const dbUpdates: Partial<ProfileRow> = {};
-      if (updates.fullName !== undefined) dbUpdates.display_name = updates.fullName;
-      if (updates.phone !== undefined) dbUpdates.phone = updates.phone;
-      if (updates.companyName !== undefined) dbUpdates.company_name = updates.companyName;
-      if (updates.industry !== undefined) dbUpdates.industry = updates.industry;
-      if (updates.gstNumber !== undefined) dbUpdates.gst_number = updates.gstNumber;
-      if (updates.address !== undefined) dbUpdates.address = updates.address;
-      if (updates.city !== undefined) dbUpdates.city = updates.city;
-      if (updates.state !== undefined) dbUpdates.state = updates.state;
-      if (updates.country !== undefined) dbUpdates.country = updates.country;
-      if (updates.pincode !== undefined) dbUpdates.pincode = updates.pincode;
-      if (updates.website !== undefined) dbUpdates.website = updates.website;
-      if (updates.linkedin !== undefined) dbUpdates.linkedin = updates.linkedin;
-      if (updates.timezone !== undefined) dbUpdates.timezone = updates.timezone;
-      if (updates.profilePhotoUrl !== undefined) dbUpdates.avatar_url = updates.profilePhotoUrl;
-      if (updates.companyLogoUrl !== undefined) dbUpdates.company_logo_url = updates.companyLogoUrl;
-
-      const { error } = await supabase.from("profiles").update(dbUpdates).eq("id", userId);
-
-      if (error) throw error;
+      await api.put('/profile', payload);
       await refreshUser();
     },
     [refreshUser],
   );
 
   const forgotPassword = useCallback(async (email: string) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/client/reset-password`,
-    });
-    if (error) throw error;
+    await api.post('/auth/forgot-password', { email });
   }, []);
 
-  const updatePassword = useCallback(async (password: string) => {
-    const { error } = await supabase.auth.updateUser({ password });
-    if (error) throw error;
+  const updatePassword = useCallback(async (password: string, token?: string) => {
+    if (!token) throw new Error('A reset token is required.');
+    await api.post('/auth/reset-password', { token, password });
+  }, []);
+
+  const changePassword = useCallback(async (currentPassword: string, newPassword: string) => {
+    await api.post('/auth/change-password', { currentPassword, newPassword });
   }, []);
 
   const value = useMemo<AuthState>(
@@ -264,6 +181,7 @@ export function ClientAuthProvider({ children }: { children: ReactNode }) {
       updateProfile,
       forgotPassword,
       updatePassword,
+      changePassword,
     }),
     [
       user,
@@ -276,6 +194,7 @@ export function ClientAuthProvider({ children }: { children: ReactNode }) {
       updateProfile,
       forgotPassword,
       updatePassword,
+      changePassword,
     ],
   );
 

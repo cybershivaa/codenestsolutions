@@ -36,7 +36,7 @@ export const projects: Project[] = [
     summary:
       "India's premier shorthand dictation & transcription learning portal for SSC, High Court, and Railway stenography exams.",
     description:
-      "India's premier online shorthand dictation platform engineered by CodeNest Solutions. Designed for SSC, High Court, and Railway stenography aspirants with 60–120 WPM audio controls, real-time typing evaluation, and subscription billing.",
+      "India's premier online shorthand dictation platform engineered by Netweavesolutions. Designed for SSC, High Court, and Railway stenography aspirants with 60–120 WPM audio controls, real-time typing evaluation, and subscription billing.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Razorpay"],
     metric: "25,000+ learners",
     gradient: "from-indigo-600 via-violet-600 to-cyan-500",
@@ -170,3 +170,4 @@ export const projects: Project[] = [
     ],
   },
 ];
+

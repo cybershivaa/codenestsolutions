@@ -3,7 +3,7 @@ import { DashboardPage } from "@/admin/pages/DashboardPage";
 
 export const Route = createFileRoute("/admin/")({
   head: () => ({
-    meta: [{ title: "Dashboard — CodeNest Admin" }],
+    meta: [{ title: "Dashboard — Netweavesolutions Admin" }],
   }),
   component: AdminIndex,
 });
@@ -11,3 +11,4 @@ export const Route = createFileRoute("/admin/")({
 function AdminIndex() {
   return <DashboardPage />;
 }
+

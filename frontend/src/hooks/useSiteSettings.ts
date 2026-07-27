@@ -13,9 +13,12 @@ export function useSiteSettings(): SiteSettings {
   }, [queryClient]);
 
   const { data } = useQuery({
-    queryKey: ["site-settings", "public"],
+    queryKey: ["site-settings", "public", "latest"],
     queryFn: () => getPublicSettings(),
-    staleTime: 60_000,
+    staleTime: 0,
+    gcTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
     initialData: defaultSettings,
   });
   return data;

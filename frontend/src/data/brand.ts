@@ -1,10 +1,10 @@
 export const brand = {
-  name: "CodeNest Solutions",
-  short: "CodeNest",
+  name: "Netweavesolutions",
+  short: "Netweavesolutions",
   tagline: "Transforming Ideas Into Powerful Digital Solutions.",
   description:
     "Premium software development agency crafting websites, apps and custom software that scale.",
-  email: "hello@company.com",
+  email: "netweavesolutions.co@gamil.com",
   phone: "+91-9876543210",
   whatsapp: "919876543210",
   address: "India",
@@ -15,3 +15,5 @@ export const brand = {
     instagram: "https://instagram.com",
   },
 };
+
+

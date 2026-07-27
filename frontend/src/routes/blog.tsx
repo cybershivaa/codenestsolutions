@@ -41,7 +41,7 @@ export const Route = createFileRoute("/blog")({
           "Deep dives into Next.js 15, microservices, Gemini AI integrations and high-conversion UI/UX patterns.",
       },
       { property: "og:title", content: `Engineering Blog — ${brand.name}` },
-      { property: "og:description", content: "Tech insights from the CodeNest engineering team." },
+      { property: "og:description", content: "Tech insights from the Netweavesolutions engineering team." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/blog" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -78,7 +78,7 @@ function Blog() {
           Tech Insights
         </span>
         <h1 className="mt-5 text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-foreground">
-          CodeNest{" "}
+          Netweavesolutions{" "}
           <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
             Engineering Blog
           </span>
@@ -236,3 +236,4 @@ function Blog() {
     </Section>
   );
 }
+

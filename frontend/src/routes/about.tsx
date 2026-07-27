@@ -25,7 +25,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Engineers building the future of software. Meet the CodeNest Solutions team, mission, values and 6-step delivery process.",
+          "Engineers building the future of software. Meet the Netweavesolutions team, mission, values and 6-step delivery process.",
       },
       { property: "og:title", content: `About — ${brand.name}` },
       { property: "og:description", content: "Engineers building the future of software." },
@@ -143,7 +143,7 @@ function About() {
       <Section className="pt-20 md:pt-28">
         <div className="text-center max-w-3xl mx-auto">
           <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur">
-            About CodeNest Solutions
+            About Netweavesolutions
           </span>
           <h1 className="mt-5 text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-foreground">
             We Are Engineers Building the{" "}
@@ -152,7 +152,7 @@ function About() {
             </span>
           </h1>
           <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
-            CodeNest exists to build world-class digital products for startups, enterprises, schools
+            Netweavesolutions exists to build world-class digital products for startups, enterprises, schools
             and hospitals — combining modern server-side rendering, native AI integrations and full
             source code transparency.
           </p>
@@ -169,7 +169,7 @@ function About() {
             </h3>
             <div className="mt-4 space-y-4 text-white/70 leading-relaxed">
               <p>
-                CodeNest was started by a group of cloud architects and senior developers who were
+                Netweavesolutions was started by a group of cloud architects and senior developers who were
                 done watching great product ideas die in slow, opaque agency delivery cycles.
               </p>
               <p>
@@ -350,3 +350,4 @@ function About() {
     </>
   );
 }
+

@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-This guide will walk you through setting up authentication and database for CodeNest Solutions using Supabase.
+This guide will walk you through setting up authentication and database for Netweavesolutions using Supabase.
 
 **Your Supabase Project:**
 
@@ -17,7 +17,7 @@ This guide will walk you through setting up authentication and database for Code
 ### Step 1: Run Database Migration
 
 1. Go to your [Supabase Dashboard](https://app.supabase.com)
-2. Select your project: **CodeNest Solutions**
+2. Select your project: **Netweavesolutions**
 3. Click **SQL Editor** in the left sidebar
 4. Click **New Query**
 5. Copy-paste the entire contents of: `supabase/migrations/001_initial_schema.sql`
@@ -465,3 +465,4 @@ VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_nk7gZSpdSXXvivfHCWQe_w_5wNiCqZv
 ---
 
 **Need help?** Check the [Supabase Documentation](https://supabase.com/docs)
+

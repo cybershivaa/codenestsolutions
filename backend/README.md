@@ -1,7 +1,7 @@
-# CodeNest Client API
+# Netweavesolutions Client API
 
 Standalone Node.js service (Express + Mongoose + JWT) powering the Client Portal
-of the CodeNest Solutions website. The Lovable frontend cannot run MongoDB
+of the Netweavesolutions website. The Lovable frontend cannot run MongoDB
 directly (it deploys to Cloudflare Workers, which has no TCP), so this service
 lives outside Lovable and is called over HTTPS.
 
@@ -77,3 +77,4 @@ The refresh cookie is httpOnly, SameSite=None, Secure (configurable).
 `projectMessages`, `projectActivities`, `projectNotes`, `projectMeetings`,
 `notifications`, `payments`, `invoices` — so Phase 2 controllers can be added
 without further migrations.
+

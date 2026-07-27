@@ -14,7 +14,7 @@ type Msg = {
 const WELCOME: Msg = {
   role: "assistant",
   content:
-    "Hello! I am **CodeNest AI Assistant**. 🚀\n\nAsk me anything about our software engineering services, pricing, tech stack, or project timelines!",
+    "Hello! I am **Netweavesolutions AI Assistant**. 🚀\n\nAsk me anything about our software engineering services, pricing, tech stack, or project timelines!",
   time: nowTime(),
 };
 
@@ -141,7 +141,7 @@ export function AIChatWidget() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <h3 className="text-sm font-semibold text-white truncate">
-                    CodeNest AI Assistant
+                    Netweavesolutions AI Assistant
                   </h3>
                   <span className="rounded-full bg-cyan-500/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-cyan-300">
                     Gemini
@@ -288,3 +288,4 @@ function MessageBubble({ m }: { m: Msg }) {
     </div>
   );
 }
+

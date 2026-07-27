@@ -7,10 +7,10 @@ import { Loader2 } from "lucide-react";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Console — CodeNest Solutions" },
+      { title: "Admin Console — Netweavesolutions" },
       {
         name: "description",
-        content: "Manage your CodeNest Solutions website, content and operations.",
+        content: "Manage your Netweavesolutions website, content and operations.",
       },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -40,3 +40,4 @@ function AdminRoot() {
     </AdminLayout>
   );
 }
+

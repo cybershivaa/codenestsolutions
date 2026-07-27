@@ -65,7 +65,7 @@ function PostPage() {
     "#Engineering",
     "#React",
     "#AI",
-    "#CodeNest",
+    "#Netweavesolutions",
   ];
 
   return (
@@ -159,3 +159,4 @@ function PostPage() {
     </article>
   );
 }
+

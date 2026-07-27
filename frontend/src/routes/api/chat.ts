@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const SYSTEM_PROMPT = `You are the friendly, expert AI Solutions Architect for CodeNest Solutions, a top-tier Software Development Agency.
+const SYSTEM_PROMPT = `You are the friendly, expert AI Solutions Architect for Netweavesolutions, a top-tier Software Development Agency.
 
 Tagline: Transforming Ideas Into Powerful Digital Solutions.
 
@@ -18,9 +18,9 @@ Tech stack: React 19, Next.js 15, TypeScript, Tailwind v4, Flutter, React Native
 Rules:
 - Keep replies short, friendly and useful (2–4 short paragraphs or bullets max).
 - Use markdown for lists/bold.
-- If asked for a precise quote, suggest the Cost Estimator and to share requirements at hello@codenest.dev.
+- If asked for a precise quote, suggest the Cost Estimator and to share requirements at netweavesolutions.co@gamil.com.
 - Never invent features or prices outside the list above.
-- If off-topic, gently steer back to CodeNest services.`;
+- If off-topic, gently steer back to Netweavesolutions services.`;
 
 export const Route = createFileRoute("/api/chat")({
   server: {
@@ -73,7 +73,7 @@ export const Route = createFileRoute("/api/chat")({
             res.status === 429
               ? "I'm getting a lot of questions right now — please try again in a moment."
               : res.status === 402
-                ? "AI credits exhausted. Please contact hello@codenest.dev."
+                ? "AI credits exhausted. Please contact netweavesolutions.co@gamil.com."
                 : "Sorry, I couldn't reach the AI service. Please try again.";
           console.error("AI gateway error", res.status, text);
           return new Response(JSON.stringify({ error: msg }), {
@@ -93,3 +93,4 @@ export const Route = createFileRoute("/api/chat")({
     },
   },
 });
+

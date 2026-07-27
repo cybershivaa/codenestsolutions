@@ -8,16 +8,16 @@ import { Label } from "@/components/ui/label";
 import { useClientAuth } from "@/hooks/use-client-auth";
 import { ApiError } from "@/lib/client-api";
 
-const search = z.object({ redirect: z.string().optional() }).catch({});
+const search = z.object({ redirect: z.string().optional(), email: z.string().optional() }).catch({});
 
 export const Route = createFileRoute("/client/login")({
   validateSearch: search,
   head: () => ({
     meta: [
-      { title: "Client Login — CodeNest Solutions" },
+      { title: "Client Login — Netweavesolutions" },
       {
         name: "description",
-        content: "Sign in to your CodeNest client portal to manage projects, invoices and files.",
+        content: "Sign in to your Netweavesolutions client portal to manage projects, invoices and files.",
       },
       { name: "robots", content: "noindex" },
     ],
@@ -27,9 +27,9 @@ export const Route = createFileRoute("/client/login")({
 
 function LoginPage() {
   const { user, login, configured, loading } = useClientAuth();
-  const { redirect } = useSearch({ from: "/client/login" });
+  const { redirect, email: emailParam } = useSearch({ from: "/client/login" });
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(emailParam || "");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -112,3 +112,4 @@ function LoginPage() {
     </div>
   );
 }
+

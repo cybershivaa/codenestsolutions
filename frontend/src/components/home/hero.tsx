@@ -179,11 +179,11 @@ export function Hero() {
               <span className="text-xs text-white/60 font-mono">codenest_app.ts</span>
             </div>
             <pre className="text-[13px] leading-relaxed font-mono p-6 text-white/90 overflow-x-auto">
-              {`import { CodeNestStudio } from '@codenest/agency';
+              {`import { NetweavesolutionsStudio } from '@codenest/agency';
 import { Gemini } from '@google/genai';
 
 const studio = new `}
-              <span className="text-cyan-400">CodeNestStudio</span>
+              <span className="text-cyan-400">NetweavesolutionsStudio</span>
               {`({
   stack: [`}
               <span className="text-emerald-400">'next15'</span>

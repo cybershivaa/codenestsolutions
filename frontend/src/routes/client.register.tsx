@@ -10,11 +10,11 @@ import { ApiError } from "@/lib/client-api";
 export const Route = createFileRoute("/client/register")({
   head: () => ({
     meta: [
-      { title: "Create your Client Account — CodeNest Solutions" },
+      { title: "Create your Client Account — Netweavesolutions" },
       {
         name: "description",
         content:
-          "Register a CodeNest client account to request quotes, start projects, and track delivery.",
+          "Register a Netweavesolutions client account to request quotes, start projects, and track delivery.",
       },
       { name: "robots", content: "noindex" },
     ],
@@ -47,8 +47,8 @@ function RegisterPage() {
     setSubmitting(true);
     try {
       const res = await registerFn({ ...form, acceptTerms: true });
-      toast.success(res.message || "Account created — check your email to verify.");
-      navigate({ to: "/client/login" });
+      toast.success(res.message || "Account created successfully. You can sign in now.");
+      navigate({ to: "/client/login", search: { email: form.email } as never });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Registration failed");
     } finally {
@@ -163,3 +163,4 @@ function RegisterPage() {
     </div>
   );
 }
+

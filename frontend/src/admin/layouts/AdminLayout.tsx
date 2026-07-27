@@ -14,7 +14,7 @@ export function AdminLayout({ children }: { children?: ReactNode }) {
           <AdminTopbar />
           <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children ?? <Outlet />}</main>
           <footer className="border-t border-border/60 px-4 py-4 text-center text-xs text-muted-foreground sm:px-6 lg:px-8">
-            © {new Date().getFullYear()} CodeNest Solutions — Admin Console v1.0
+            © {new Date().getFullYear()} Netweavesolutions — Admin Console v1.0
           </footer>
         </div>
         <NotificationDrawer />
@@ -22,3 +22,4 @@ export function AdminLayout({ children }: { children?: ReactNode }) {
     </AdminUIProvider>
   );
 }
+

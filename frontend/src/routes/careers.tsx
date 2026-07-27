@@ -33,7 +33,7 @@ export const Route = createFileRoute("/careers")({
       { title: `Careers — ${brand.name}` },
       { name: "description", content: "Join a small, senior team building software that matters." },
       { property: "og:title", content: `Careers — ${brand.name}` },
-      { property: "og:description", content: "Open roles at CodeNest Solutions." },
+      { property: "og:description", content: "Open roles at Netweavesolutions." },
       { property: "og:url", content: "/careers" },
     ],
     links: [{ rel: "canonical", href: "/careers" }],
@@ -226,3 +226,4 @@ function Careers() {
     </>
   );
 }
+

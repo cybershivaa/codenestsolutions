@@ -19,7 +19,7 @@ const pages = [
 export function WebsitePage() {
   return (
     <div>
-      <PageHeader title="Website" description="Manage the public-facing pages of codenest.dev." />
+      <PageHeader title="Website" description="Manage the public-facing pages of Netweavesolutions.com." />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           gradient
@@ -78,3 +78,4 @@ export function WebsitePage() {
     </div>
   );
 }
+

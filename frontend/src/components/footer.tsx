@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link to="/" aria-label={brand.name}>
-              <Logo wordmark={brand.short || "CodeNest"} />
+              <Logo wordmark={brand.short || "Netweavesolutions"} />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
               {brand.tagline}
@@ -119,3 +119,4 @@ export function Footer() {
     </footer>
   );
 }
+

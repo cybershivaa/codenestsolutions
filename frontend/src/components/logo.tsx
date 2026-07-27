@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 /**
- * CodeNestSolutions wordmark.
- * Minimal geometric mark (nested square/nest motif) + typography.
+ * Netweavesolutions wordmark.
+ * Minimal geometric mark + typography.
  * Uses currentColor so it inherits foreground; the mark uses primary.
  */
 export function LogoMark({ className }: { className?: string }) {
@@ -29,7 +29,7 @@ export function LogoMark({ className }: { className?: string }) {
 export function Logo({
   className,
   showWordmark = true,
-  wordmark = "CodeNest",
+  wordmark = "Netweavesolutions",
 }: {
   className?: string;
   showWordmark?: boolean;
@@ -41,9 +41,9 @@ export function Logo({
       {showWordmark && (
         <span className="font-display font-semibold text-[15px] tracking-tight text-foreground">
           {wordmark}
-          <span className="text-muted-foreground">Solutions</span>
         </span>
       )}
     </span>
   );
 }
+

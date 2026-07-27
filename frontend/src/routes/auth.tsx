@@ -11,8 +11,8 @@ import { Loader2 } from "lucide-react";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — CodeNest Admin" },
-      { name: "description", content: "Admin sign in for CodeNest Solutions." },
+      { title: "Sign in — Netweavesolutions Admin" },
+      { name: "description", content: "Admin sign in for Netweavesolutions." },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -155,3 +155,4 @@ function AuthPage() {
     </div>
   );
 }
+

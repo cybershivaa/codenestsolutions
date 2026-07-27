@@ -13,8 +13,8 @@ export const Route = createFileRoute("/client/reset-password")({
   validateSearch: search,
   head: () => ({
     meta: [
-      { title: "Reset Password — CodeNest Solutions" },
-      { name: "description", content: "Set a new password for your CodeNest client account." },
+      { title: "Reset Password — Netweavesolutions" },
+      { name: "description", content: "Set a new password for your Netweavesolutions client account." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/client/reset-password")({
 function ResetPage() {
   const { updatePassword } = useClientAuth();
   const navigate = useNavigate();
+  const search = useSearch({ from: "/client/reset-password" });
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -33,7 +34,7 @@ function ResetPage() {
     if (password !== confirm) return toast.error("Passwords do not match");
     setSubmitting(true);
     try {
-      await updatePassword(password);
+      await updatePassword(password, search.token);
       toast.success("Password reset successfully. Please sign in.");
       navigate({ to: "/client/login" });
     } catch (err: unknown) {
@@ -83,3 +84,4 @@ function ResetPage() {
     </div>
   );
 }
+

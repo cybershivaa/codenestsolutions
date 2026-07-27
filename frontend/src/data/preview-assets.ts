@@ -47,7 +47,7 @@ export const stenomaniaPreviewSvg = `<svg width="1600" height="900" viewBox="0 0
       <text x="284" y="314" fill="#94A3B8" font-family="Inter, Arial, sans-serif" font-size="14">Education &amp; Stenography</text>
     </g>
     <text x="134" y="408" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="700">Stenomania Dictations</text>
-    <text x="134" y="462" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="22">India's premier shorthand dictation platform engineered by CodeNest Solutions.</text>
+    <text x="134" y="462" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="22">India's premier shorthand dictation platform engineered by Netweavesolutions.</text>
     <text x="134" y="492" fill="#C7D2FE" font-family="Inter, Arial, sans-serif" font-size="22">60-120 WPM controls, real-time typing evaluation, and subscription billing.</text>
     <g>
       <rect x="134" y="560" width="206" height="100" rx="22" fill="#10192E" stroke="rgba(255,255,255,0.08)"/>
@@ -86,3 +86,4 @@ export const stenomaniaPreviewSvg = `<svg width="1600" height="900" viewBox="0 0
     <text x="1205" y="615" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">BEGINNER'S</text>
   </g>
 </svg>`;
+

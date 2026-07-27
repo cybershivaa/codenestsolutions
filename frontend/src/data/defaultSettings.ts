@@ -37,12 +37,12 @@ export type SiteSettings = {
 
 export const defaultSettings: SiteSettings = {
   brand: {
-    name: "CodeNest Solutions",
-    short: "CodeNest",
+    name: "Netweavesolutions",
+    short: "Netweavesolutions",
     tagline: "Transforming Ideas Into Powerful Digital Solutions.",
     description:
       "Premium software development agency crafting websites, apps and custom software that scale.",
-    email: "hello@company.com",
+    email: "netweavesolutions.co@gamil.com",
     phone: "+91-9876543210",
     whatsapp: "919876543210",
     address: "India",
@@ -74,11 +74,11 @@ export const defaultSettings: SiteSettings = {
     ctaSecondary: { label: "View Work", to: "/portfolio" },
   },
   footer: {
-    copyright: "© CodeNest Solutions. All rights reserved.",
+    copyright: "© Netweavesolutions. All rights reserved.",
     showNewsletter: true,
   },
   seo: {
-    title: "CodeNest Solutions — Premium Software Development Agency",
+    title: "Netweavesolutions — Premium Software Development Agency",
     description: "Transforming Ideas Into Powerful Digital Solutions.",
   },
   theme: {
@@ -101,3 +101,4 @@ export function mergeSettings(partial: unknown): SiteSettings {
     theme: { ...defaultSettings.theme, ...(p.theme ?? {}) },
   };
 }
+

@@ -36,10 +36,10 @@ export const Route = createFileRoute("/portfolio")({
       {
         name: "description",
         content:
-          "Featured case studies: high-concurrency SaaS, ERP platforms, mobile apps and AI bots engineered by CodeNest.",
+          "Featured case studies: high-concurrency SaaS, ERP platforms, mobile apps and AI bots engineered by Netweavesolutions.",
       },
       { property: "og:title", content: `Engineering Portfolio — ${brand.name}` },
-      { property: "og:description", content: "Real-world case studies from CodeNest Solutions." },
+      { property: "og:description", content: "Real-world case studies from Netweavesolutions." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/portfolio" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -254,3 +254,4 @@ function Portfolio() {
     </>
   );
 }
+

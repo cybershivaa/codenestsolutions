@@ -13,13 +13,13 @@ import { ContactCta } from "@/components/home/contact-cta";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CodeNest Solutions — Premium Software Development Agency" },
+      { title: "Netweavesolutions — Premium Software Development Agency" },
       {
         name: "description",
         content:
           "Websites, apps and custom software crafted by a senior team. Transforming ideas into powerful digital solutions.",
       },
-      { property: "og:title", content: "CodeNest Solutions" },
+      { property: "og:title", content: "Netweavesolutions" },
       { property: "og:description", content: "Premium software development agency." },
       { property: "og:url", content: "/" },
     ],
@@ -44,3 +44,4 @@ function Home() {
     </>
   );
 }
+

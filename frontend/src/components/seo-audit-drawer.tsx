@@ -21,8 +21,8 @@ export function openSeoDrawer() {
 
 export function SeoAuditDrawer() {
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState("https://codenest.solutions");
-  const [title, setTitle] = useState("CodeNest Solutions — Premium Software Development Agency");
+  const [url, setUrl] = useState("https://Netweavesolutions.com");
+  const [title, setTitle] = useState("Netweavesolutions — Premium Software Development Agency");
   const [desc, setDesc] = useState(
     "Transforming ideas into powerful digital solutions. Web, mobile, ERP & AI.",
   );
@@ -160,7 +160,7 @@ export function SeoAuditDrawer() {
             <pre className="mt-2 text-[10px] leading-relaxed text-muted-foreground overflow-x-auto">{`{
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "CodeNest Solutions",
+  "name": "Netweavesolutions",
   "url": "${url}"
 }`}</pre>
           </div>
@@ -173,3 +173,4 @@ export function SeoAuditDrawer() {
     </Sheet>
   );
 }
+

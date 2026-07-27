@@ -12,7 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { getDraftSettings, saveDraftSettings, publishSettings } from "@/lib/cms.functions";
-import { defaultSettings, type SiteSettings, type NavItem } from "@/data/defaultSettings";
+import { defaultSettings, mergeSettings, type SiteSettings, type NavItem } from "@/data/defaultSettings";
 import { invalidatePublishedContent } from "@/hooks/siteContentSync";
 
 export function CMSPage() {
@@ -54,6 +54,9 @@ export function CMSPage() {
     setPublishing(true);
     try {
       await publish({ data: settings as unknown as Record<string, unknown> });
+      queryClient.setQueryData(["site-settings", "public", "latest"], mergeSettings(settings));
+      await queryClient.invalidateQueries({ queryKey: ["site-settings", "public"] });
+      await queryClient.refetchQueries({ queryKey: ["site-settings", "public"] });
       invalidatePublishedContent(queryClient);
       toast.success("Published — public site updated");
     } catch (e: unknown) {

@@ -9,8 +9,8 @@ import { useClientAuth } from "@/hooks/use-client-auth";
 export const Route = createFileRoute("/client/forgot-password")({
   head: () => ({
     meta: [
-      { title: "Forgot Password — CodeNest Solutions" },
-      { name: "description", content: "Reset your CodeNest client account password." },
+      { title: "Forgot Password — Netweavesolutions" },
+      { name: "description", content: "Reset your Netweavesolutions client account password." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -74,3 +74,4 @@ function ForgotPage() {
     </div>
   );
 }
+

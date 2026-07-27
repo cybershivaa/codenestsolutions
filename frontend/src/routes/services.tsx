@@ -17,7 +17,7 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Web, mobile, custom software, design and growth services from CodeNest Solutions.",
+          "Web, mobile, custom software, design and growth services from Netweavesolutions.",
       },
       { property: "og:title", content: `Services — ${brand.name}` },
       {
@@ -154,7 +154,7 @@ function Services() {
         eyebrow="Comparison"
         title={
           <>
-            Why teams pick <span className="text-gradient">CodeNest.</span>
+            Why teams pick <span className="text-gradient">Netweavesolutions.</span>
           </>
         }
       >
@@ -165,7 +165,7 @@ function Services() {
                 <th className="px-4 py-3 text-left font-semibold">Feature</th>
                 <th className="px-4 py-3 font-semibold">
                   <span className="inline-block rounded-md bg-gradient-brand px-2 py-0.5 text-primary-foreground text-xs">
-                    CodeNest
+                    Netweavesolutions
                   </span>
                 </th>
                 <th className="px-4 py-3 font-semibold text-muted-foreground">Freelancers</th>
@@ -208,3 +208,4 @@ function Services() {
     </>
   );
 }
+

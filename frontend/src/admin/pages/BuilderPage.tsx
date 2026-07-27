@@ -749,7 +749,7 @@ export function BuilderPage() {
                   >
                     C
                   </span>
-                  CodeNest
+                  Netweavesolutions
                 </div>
                 <div
                   className="hidden gap-4 text-xs md:flex"
@@ -800,7 +800,7 @@ export function BuilderPage() {
                         : "md:grid-cols-2",
                   )}
                 >
-                  <div>© 2026 CodeNest Solutions</div>
+                  <div>© 2026 Netweavesolutions</div>
                   {theme.footerStyle !== "minimal" && (
                     <div>
                       Company
@@ -1437,3 +1437,4 @@ function SectionBody({ section, theme }: { section: Section; theme: Theme }) {
       );
   }
 }
+

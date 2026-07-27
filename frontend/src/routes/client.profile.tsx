@@ -11,10 +11,10 @@ import { useClientAuth } from "@/hooks/use-client-auth";
 export const Route = createFileRoute("/client/profile")({
   head: () => ({
     meta: [
-      { title: "My Profile — CodeNest Client Portal" },
+      { title: "My Profile — Netweavesolutions Client Portal" },
       {
         name: "description",
-        content: "Manage your CodeNest client profile, company details and preferences.",
+        content: "Manage your Netweavesolutions client profile, company details and preferences.",
       },
       { name: "robots", content: "noindex" },
     ],
@@ -91,3 +91,4 @@ function ProfilePage() {
     </ClientPortalShell>
   );
 }
+

@@ -12,7 +12,7 @@ export const testimonials: Testimonial[] = [
     role: "Head of Product",
     company: "Northwind Health",
     quote:
-      "CodeNest rebuilt our patient portal in ten weeks. Load time dropped 62%, appointment completion is up 34%. They ship like a product team, not an agency.",
+      "Netweavesolutions rebuilt our patient portal in ten weeks. Load time dropped 62%, appointment completion is up 34%. They ship like a product team, not an agency.",
     avatar: "PM",
   },
   {
@@ -48,3 +48,4 @@ export const testimonials: Testimonial[] = [
     avatar: "SA",
   },
 ];
+

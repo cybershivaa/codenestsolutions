@@ -129,13 +129,13 @@ function GeneralSettings() {
   return (
     <Section title="General" description="Basic site information.">
       <Row label="Site Name">
-        <Input defaultValue="CodeNest Solutions" />
+        <Input defaultValue="Netweavesolutions" />
       </Row>
       <Row label="Tagline">
         <Input defaultValue="Transforming Ideas Into Powerful Digital Solutions" />
       </Row>
       <Row label="Contact Email">
-        <Input defaultValue="hello@codenest.dev" />
+        <Input defaultValue="netweavesolutions.co@gamil.com" />
       </Row>
       <Row label="Timezone">
         <Input defaultValue="Asia/Kolkata" />
@@ -224,7 +224,7 @@ function EmailSettings() {
         <Input type="number" defaultValue={587} />
       </Row>
       <Row label="From Address">
-        <Input defaultValue="no-reply@codenest.dev" />
+        <Input defaultValue="netweavesolutions.co@gamil.com" />
       </Row>
     </Section>
   );
@@ -237,7 +237,7 @@ function WhatsAppSettings() {
         <Input defaultValue="+91 98765 43210" />
       </Row>
       <Row label="Default Message">
-        <Textarea defaultValue="Hi, I'd like to know more about CodeNest Solutions." />
+        <Textarea defaultValue="Hi, I'd like to know more about Netweavesolutions." />
       </Row>
     </Section>
   );
@@ -290,3 +290,4 @@ function StorageSettings() {
     </Section>
   );
 }
+

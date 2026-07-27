@@ -97,7 +97,7 @@ export function AdminSidebar() {
         </div>
         {!sidebarCollapsed && (
           <div className="min-w-0">
-            <div className="truncate text-sm font-semibold">CodeNest</div>
+            <div className="truncate text-sm font-semibold">Netweavesolutions</div>
             <div className="truncate text-xs text-muted-foreground">Admin Console</div>
           </div>
         )}
@@ -215,3 +215,4 @@ export function AdminSidebar() {
     </>
   );
 }
+

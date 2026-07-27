@@ -41,7 +41,7 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" aria-label={settings.brand.name} className="shrink-0">
-            <Logo wordmark={settings.brand.short || "CodeNest"} />
+            <Logo wordmark={settings.brand.short || "Netweavesolutions"} />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
@@ -157,3 +157,4 @@ export function Navbar() {
     </header>
   );
 }
+

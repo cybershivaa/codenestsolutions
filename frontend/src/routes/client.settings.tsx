@@ -9,13 +9,13 @@ import { useClientAuth } from "@/hooks/use-client-auth";
 
 export const Route = createFileRoute("/client/settings")({
   head: () => ({
-    meta: [{ title: "Settings — CodeNest Client Portal" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Settings — Netweavesolutions Client Portal" }, { name: "robots", content: "noindex" }],
   }),
   component: SettingsPage,
 });
 
 function SettingsPage() {
-  const { updatePassword } = useClientAuth();
+  const { changePassword } = useClientAuth();
   const [currentPassword, setCurrent] = useState("");
   const [newPassword, setNext] = useState("");
   const [saving, setSaving] = useState(false);
@@ -24,7 +24,7 @@ function SettingsPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      await updatePassword(newPassword);
+      await changePassword(currentPassword, newPassword);
       toast.success("Password updated");
       setCurrent("");
       setNext("");
@@ -70,3 +70,4 @@ function SettingsPage() {
     </ClientPortalShell>
   );
 }
+

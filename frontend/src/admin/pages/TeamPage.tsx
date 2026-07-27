@@ -81,7 +81,7 @@ export function TeamPage() {
     <div>
       <PageHeader
         title="Team"
-        description="People with admin access to CodeNest solutions."
+        description="People with admin access to Netweavesolutions."
         actions={
           <Button
             size="sm"
@@ -135,3 +135,4 @@ export function TeamPage() {
     </div>
   );
 }
+

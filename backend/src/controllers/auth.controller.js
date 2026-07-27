@@ -69,7 +69,6 @@ export async function register(req, res) {
   if (existing) return res.status(409).json({ error: "Email already registered" });
 
   const passwordHash = await bcrypt.hash(password, 12);
-  const emailVerifyToken = newOpaqueToken();
   const client = await Client.create({
     fullName,
     email,
@@ -79,17 +78,14 @@ export async function register(req, res) {
     referralCode,
     passwordHash,
     acceptedTerms: true,
-    emailVerifyToken,
-    emailVerifyExpires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    emailVerified: true,
+    emailVerifyToken: undefined,
+    emailVerifyExpires: undefined,
   });
-
-  const link = `${env.FRONTEND_PRIMARY}/client/verify-email?token=${emailVerifyToken}`;
-  const tpl = emailTemplates.verifyEmail(fullName, link);
-  sendMail({ to: email, ...tpl }).catch((e) => console.error("[mail]", e));
 
   return res.status(201).json({
     ok: true,
-    message: "Account created. Check your email to verify.",
+    message: "Account created successfully. You can sign in now.",
     client: client.toSafeJSON(),
   });
 }

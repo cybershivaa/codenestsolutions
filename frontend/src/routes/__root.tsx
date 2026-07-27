@@ -88,23 +88,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CodeNest Solutions — Premium Software Development Agency" },
+      { title: "Netweavesolutions — Premium Software Development Agency" },
       {
         name: "description",
         content:
-          "CodeNest Solutions builds premium websites, apps and custom software. Transforming ideas into powerful digital solutions.",
+          "Netweavesolutions builds premium websites, apps and custom software. Transforming ideas into powerful digital solutions.",
       },
-      { name: "author", content: "CodeNest Solutions" },
+      { name: "author", content: "Netweavesolutions" },
       { name: "theme-color", content: "#4F46E5" },
-      { property: "og:site_name", content: "CodeNest Solutions" },
+      { property: "og:site_name", content: "Netweavesolutions" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "CodeNest Solutions — Premium Software Development Agency" },
+      { property: "og:title", content: "Netweavesolutions — Premium Software Development Agency" },
       {
         property: "og:description",
         content: "Websites, apps and custom software crafted by a senior team.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "CodeNest Solutions" },
+      { name: "twitter:title", content: "Netweavesolutions" },
       {
         name: "twitter:description",
         content: "Transforming ideas into powerful digital solutions.",
@@ -126,9 +126,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "CodeNest Solutions",
+          name: "Netweavesolutions",
           description: "Premium software development agency.",
-          email: "hello@company.com",
+          email: "netweavesolutions.co@gamil.com",
           telephone: "+91-9876543210",
           address: { "@type": "PostalAddress", addressCountry: "IN" },
         }),
@@ -194,3 +194,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+

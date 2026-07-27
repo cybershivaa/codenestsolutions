@@ -25,7 +25,7 @@ export function FloatingWhatsApp() {
                 <MessageCircle className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-semibold">CodeNest Solutions</div>
+                <div className="text-sm font-semibold">Netweavesolutions</div>
                 <div className="text-[11px] text-white/80 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
                   Typically replies in minutes
@@ -64,7 +64,7 @@ export function FloatingWhatsApp() {
                 ))}
               </div>
               <a
-                href={waLink("Hi CodeNest, I'd like to discuss a project.")}
+                href={waLink("Hi Netweavesolutions, I'd like to discuss a project.")}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center justify-center gap-2 w-full rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm py-2.5 transition-colors"
@@ -92,3 +92,4 @@ export function FloatingWhatsApp() {
     </>
   );
 }
+

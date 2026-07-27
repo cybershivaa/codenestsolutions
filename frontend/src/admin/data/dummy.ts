@@ -143,7 +143,7 @@ export const team: TeamMember[] = [
     id: `TM-${i + 1}`,
     name,
     role,
-    email: `${name.split(" ")[0].toLowerCase()}@codenest.dev`,
+    email: `${name.split(" ")[0].toLowerCase()}@netweavesolutions.co@gamil.com`,
     status: i % 5 === 0 ? "On Leave" : "Active",
     avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}`,
   };
@@ -259,7 +259,7 @@ export const testimonials: Testimonial[] = [
     id: "T-1",
     name: "Rohan Mehta",
     company: "Nova Bank",
-    quote: "CodeNest delivered beyond expectations — polished, fast, and reliable.",
+    quote: "Netweavesolutions delivered beyond expectations — polished, fast, and reliable.",
     rating: 5,
     approved: true,
   },
@@ -356,7 +356,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "U-1",
     name: "Aarav Sharma",
-    email: "aarav@codenest.dev",
+    email: "aarav@netweavesolutions.co@gamil.com",
     role: "Owner",
     status: "Active",
     lastActive: "2m ago",
@@ -364,7 +364,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "U-2",
     name: "Priya Patel",
-    email: "priya@codenest.dev",
+    email: "priya@netweavesolutions.co@gamil.com",
     role: "Admin",
     status: "Active",
     lastActive: "1h ago",
@@ -372,7 +372,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "U-3",
     name: "Marcus Lee",
-    email: "marcus@codenest.dev",
+    email: "marcus@netweavesolutions.co@gamil.com",
     role: "Editor",
     status: "Active",
     lastActive: "3h ago",
@@ -380,7 +380,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "U-4",
     name: "Hana Tanaka",
-    email: "hana@codenest.dev",
+    email: "hana@netweavesolutions.co@gamil.com",
     role: "Editor",
     status: "Invited",
     lastActive: "—",
@@ -388,7 +388,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "U-5",
     name: "Diego Rivera",
-    email: "diego@codenest.dev",
+    email: "diego@netweavesolutions.co@gamil.com",
     role: "Viewer",
     status: "Suspended",
     lastActive: "5d ago",
@@ -416,7 +416,7 @@ export const notifications: AdminNotification[] = [
   {
     id: "N-2",
     title: "Deployment successful",
-    description: "codenest.dev v2.14.0 pushed to production",
+    description: "Netweavesolutions.com v2.14.0 pushed to production",
     time: "18m ago",
     type: "success",
     read: false,
@@ -454,3 +454,4 @@ export const activities = [
   { id: 4, who: "Hana Tanaka", what: "closed job — Frontend Intern", when: "3h ago" },
   { id: 5, who: "Aarav Sharma", what: "invited a new admin", when: "1d ago" },
 ];
+

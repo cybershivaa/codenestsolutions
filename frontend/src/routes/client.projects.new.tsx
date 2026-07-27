@@ -4,7 +4,7 @@ import { ClientPortalShell, ComingSoon } from "@/components/client/client-portal
 export const Route = createFileRoute("/client/projects/new")({
   head: () => ({
     meta: [
-      { title: "Create New Project — CodeNest Client Portal" },
+      { title: "Create New Project — Netweavesolutions Client Portal" },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -14,3 +14,4 @@ export const Route = createFileRoute("/client/projects/new")({
     </ClientPortalShell>
   ),
 });
+

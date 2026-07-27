@@ -28,22 +28,23 @@ export async function sendMail({ to, subject, html, text }) {
 
 export const emailTemplates = {
   verifyEmail: (name, link) => ({
-    subject: "Verify your CodeNest account",
+    subject: "Verify your Netweavesolutions account",
     html: `<p>Hi ${name || "there"},</p>
-      <p>Confirm your email to activate your CodeNest client account:</p>
+      <p>Confirm your email to activate your Netweavesolutions client account:</p>
       <p><a href="${link}">Verify email</a></p>
       <p>Link expires in 24 hours.</p>`,
   }),
   resetPassword: (name, link) => ({
-    subject: "Reset your CodeNest password",
+    subject: "Reset your Netweavesolutions password",
     html: `<p>Hi ${name || "there"},</p>
       <p>Click below to reset your password. If you didn't request this, ignore this email.</p>
       <p><a href="${link}">Reset password</a></p>
       <p>Link expires in 1 hour.</p>`,
   }),
   otp: (name, code) => ({
-    subject: `Your CodeNest verification code: ${code}`,
+    subject: `Your Netweavesolutions verification code: ${code}`,
     html: `<p>Hi ${name || "there"},</p>
       <p>Your one-time code is <b style="font-size:20px">${code}</b>. It expires in 10 minutes.</p>`,
   }),
 };
+
